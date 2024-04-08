@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 const Modal = ({ visibleData, onCloseModal }) => {
   const [dataType, setDataType] = useState('emails');
+  // const btnEmailsRef = useRef();
+  // const btnUserRef = useRef();
   // console.log('visibleData: ', visibleData);
 
   const handleOverlayClick = event => {
@@ -51,7 +53,13 @@ const Modal = ({ visibleData, onCloseModal }) => {
         <div className="buttonType">
           <button
             className={`button-type ${dataType === 'emails' ? 'active' : ''}`}
-            onClick={() => onSetDataType('emails')}
+            onClick={() => {
+              onSetDataType('emails');
+              // btnUserRef.current.focus();
+
+              // console.log(window.getComputedStyle(btnEmailsRef.current).color);
+            }}
+            // ref={btnEmailsRef}
             type="button"
           >
             Emails
@@ -59,6 +67,7 @@ const Modal = ({ visibleData, onCloseModal }) => {
           <button
             className={`button-type ${dataType === 'users' ? 'active' : ''}`}
             onClick={() => onSetDataType('users')}
+            // ref={btnUserRef}
             type="button"
           >
             Users

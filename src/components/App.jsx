@@ -17,10 +17,13 @@ const toastConfig = {
 
 const App = () => {
   const [modal, setModal] = useState({ isOpen: false, visibleData: null });
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(
+    () => JSON.parse(localStorage.getItem('posts')) ?? []
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedPostId, setSelectedPostId] = useState(null);
+  // const firstRenderRef = useRef(true);
 
   const onOpenModal = data => {
     setModal({
@@ -58,7 +61,8 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (selectedPostId === null) return;
+    // if (firstRenderRef.current) return () => (firstRenderRef.current = false);
+    if (!selectedPostId) return;
 
     const fetchPostData = async postId => {
       try {
